@@ -18,6 +18,7 @@ import javax.inject.Inject
 fun DetailScreen(
     viewModel: DetailViewModel
 ) {
+
 }
 
 @Composable

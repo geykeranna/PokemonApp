@@ -1,19 +1,10 @@
 package ru.testtask.pokemonapp.ui.home
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.testtask.pokemonapp.domain.model.Pokemons
 import ru.testtask.pokemonapp.domain.repository.PokemonsRepository
@@ -36,7 +27,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun startLoading() = viewModelScope.launch {
-        _pokemonList = repository.getProductList()
+        _pokemonList = repository.getPokemonsList()
     }
 
     sealed class Event : BaseEvent() {
