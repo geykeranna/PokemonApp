@@ -75,6 +75,16 @@ dependencies {
     implementation libs.accompanist.flowlayout
     implementation libs.accompanist.pager
 
+    // retrofit
+    implementation libs.retrofit
+    implementation libs.converter.gson
+
+    //Coil
+    implementation libs.coil.compose
+    implementation libs.accompanist.coil
+
+    //navigation
+    implementation libs.androidx.navigation.compose
 
     //HILT
     implementation libs.hilt.android
@@ -87,4 +97,8 @@ dependencies {
 
     //Navigation
     implementation libs.androidx.navigation.compose
+
+    //Paging 3
+    implementation libs.androidx.paging.runtime.ktx
+    implementation libs.androidx.paging.compose
 }

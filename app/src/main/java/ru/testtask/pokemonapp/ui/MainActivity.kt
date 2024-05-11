@@ -16,6 +16,7 @@ import ru.testtask.pokemonapp.di.navigation.NavigationFactory
 import ru.testtask.pokemonapp.di.navigation.NavigationHostFactory
 import ru.testtask.pokemonapp.di.navigation.NavigationScreenFactory
 import ru.testtask.pokemonapp.ui.detail.DetailViewModel
+import ru.testtask.pokemonapp.ui.home.HomeViewModel
 import ru.testtask.pokemonapp.ui.navigation.NavItem
 import ru.testtask.pokemonapp.ui.theme.PokemonAppTheme
 import javax.inject.Inject

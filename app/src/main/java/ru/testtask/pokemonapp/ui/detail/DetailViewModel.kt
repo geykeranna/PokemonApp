@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import ru.testtask.pokemonapp.domain.repository.PokemonsRepository
 import ru.testtask.pokemonapp.ui.base.BaseEvent
 import ru.testtask.pokemonapp.ui.base.BaseViewModel
 import javax.inject.Inject
@@ -12,7 +13,7 @@ import javax.inject.Inject
 class DetailViewModel @AssistedInject constructor(
     @Assisted
     private val pokemonId: Long,
-//    private val repository: Repository
+    private val repository: PokemonsRepository
 ) : BaseViewModel<DetailViewModel.Event>() {
 
     sealed class Event : BaseEvent() {
