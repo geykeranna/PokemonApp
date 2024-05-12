@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -37,13 +38,14 @@ fun HomeScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 20.dp)
+            .padding(horizontal = 20.dp, vertical = 40.dp)
     ) {
         Text(
             text = "Покемоны:",
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 5.dp)
+                .padding(vertical = 15.dp),
+            fontSize = 34.sp
         )
         LazyColumn {
             items( pokemonsList.itemCount ) {
@@ -57,6 +59,7 @@ fun HomeScreen(
                             }
                         ,
                         text = pokemon.name,
+                        fontSize = 26.sp
                     )
                 }
             }

@@ -8,7 +8,8 @@ data class PokemonInfo(
     val name: String,
     val order: Int,
     val stats: List<Stat>,
-    val types: List<String>
+    val types: List<String>,
+    val imgURL: String,
 ) {
     companion object{
         val shimmerData = PokemonInfo(
@@ -18,7 +19,8 @@ data class PokemonInfo(
             order = 0,
             abilities = listOf(),
             baseExperience = 0,
-            types = listOf()
+            types = listOf(),
+            imgURL = ""
         )
     }
 }

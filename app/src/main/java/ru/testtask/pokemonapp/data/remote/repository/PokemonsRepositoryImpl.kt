@@ -38,7 +38,8 @@ class PokemonsRepositoryImpl @Inject constructor(
                 name = it.stat.name,
                 effort = it.effort
             )},
-            types = item.types.map { it.type.name }
+            types = item.types.map { it.type.name },
+            imgURL = item.sprites.front_default
         )
     }
 }

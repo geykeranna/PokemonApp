@@ -21,10 +21,6 @@ class DetailViewModel @AssistedInject constructor(
     private val repository: PokemonsRepository
 ) : BaseViewModel<DetailViewModel.Event>() {
 
-    init {
-        obtainEvent(Event.OnLoadingStarted)
-    }
-
     val pokemon: StateFlow<PokemonInfo>
         get() = _pokemon.asStateFlow()
 
@@ -44,6 +40,10 @@ class DetailViewModel @AssistedInject constructor(
                 startLoading()
             }
         }
+    }
+
+    init {
+        obtainEvent(Event.OnLoadingStarted)
     }
 
     @AssistedFactory
