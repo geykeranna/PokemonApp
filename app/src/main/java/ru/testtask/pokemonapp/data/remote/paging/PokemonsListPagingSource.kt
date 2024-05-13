@@ -30,7 +30,7 @@ class PokemonsListPagingSource(
 
             LoadResult.Page(
                 data = respItems,
-                nextKey = if (pokemonsResp.next != null) null else page + 1,
+                nextKey = if (pokemonsResp.next == null) null else page + 1,
                 prevKey = null
             )
         } catch (e: Exception){
