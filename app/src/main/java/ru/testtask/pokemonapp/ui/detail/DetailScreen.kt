@@ -3,11 +3,13 @@ package ru.testtask.pokemonapp.ui.detail
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -75,6 +77,7 @@ fun DetailScreen(
             AsyncImage(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(300.dp)
                     .padding(20.dp)
                     .clip(RoundedCornerShape(20.dp)),
                 model = detailInfo.imgURL,
@@ -87,10 +90,15 @@ fun DetailScreen(
                     if (it.isLowerCase()) it.titlecase(java.util.Locale.US) else it.toString()
                 }.replace('-', ' '),
                 fontSize = 42.sp,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.typography.bodyLarge.color
             )
 
-            TypeInfo(types = detailInfo.types)
+            TypeInfo(
+                types = detailInfo.types,
+                baseExperience = detailInfo.baseExperience,
+                order = detailInfo.order
+            )
 
             StatsInfo(
                 modifier = Modifier.padding(bottom = 20.dp),

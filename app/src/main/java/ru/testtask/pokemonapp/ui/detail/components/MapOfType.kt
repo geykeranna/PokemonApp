@@ -19,5 +19,9 @@ val mapOfType: Map<String, Int> = mapOf(
     "ice" to R.drawable.ice_type,
     "dragon" to R.drawable.dragon_type,
     "dark" to R.drawable.dark_type,
-    "fairy" to R.drawable.fairy_type,
+
+    // Не нашлись красивые иконки под типы
+    "fairy" to R.drawable.poison_type,
+    "stellar" to R.drawable.normal_type,
+    "unknown" to R.drawable.normal_type
 )
