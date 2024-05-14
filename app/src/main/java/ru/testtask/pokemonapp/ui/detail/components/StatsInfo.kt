@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,6 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Text
 import ru.testtask.pokemonapp.domain.model.Stat
 import ru.testtask.pokemonapp.ui.theme.BackgroundBoxColor
+import ru.testtask.pokemonapp.ui.theme.PrimColor
+import ru.testtask.pokemonapp.ui.theme.SecColor
 import java.util.Locale
 
 @Composable
@@ -62,14 +65,14 @@ fun StatsInfo(
                         .height(20.dp)
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(20.dp))
-                        .background(Color.LightGray)
+                        .background(SecColor)
                     )
                     Box (
                         modifier = Modifier
                             .width((stats[it].baseStat * 2).dp)
                             .height(20.dp)
                             .clip(RoundedCornerShape(20.dp))
-                            .background(Color.Blue)
+                            .background(PrimColor)
                     )
                 }
             }

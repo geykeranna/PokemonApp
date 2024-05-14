@@ -34,6 +34,7 @@ import ru.testtask.pokemonapp.R
 import ru.testtask.pokemonapp.ui.MainActivity
 import ru.testtask.pokemonapp.di.navigation.NavigationFactory
 import ru.testtask.pokemonapp.di.navigation.NavigationScreenFactory
+import ru.testtask.pokemonapp.ui.components.EmptyScreen
 import ru.testtask.pokemonapp.ui.detail.components.StatsInfo
 import ru.testtask.pokemonapp.ui.detail.components.TypeInfo
 import javax.inject.Inject
@@ -44,59 +45,79 @@ fun DetailScreen(
     viewModel: DetailViewModel,
     navGraph: NavHostController
 ) {
-    
     val detailInfo = viewModel.pokemon.collectAsState().value
-    
-    Column(
-        modifier = Modifier.fillMaxSize(),
 
-    ) {
-        TopAppBar(
-            title = { },
-            modifier = Modifier.fillMaxWidth(),
-            colors = TopAppBarDefaults.mediumTopAppBarColors(
-                containerColor = Color.Transparent,
-            ),
-            navigationIcon = {
-                IconButton(
-                    onClick = {
-                        if (navGraph.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
-                            navGraph.popBackStack()
-                    }
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_back),
-                        contentDescription = "back button"
-                    )
-                }
-            }
-        )
-        AsyncImage(
+    if (handleResults(loadState = viewModel.state)) {
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(20.dp)
-                .clip(RoundedCornerShape(20.dp)),
-            model = detailInfo.imgURL,
-            contentDescription = "Pokemon img"
-        )
+                .fillMaxSize(),
+        ) {
+            TopAppBar(
+                title = { },
+                modifier = Modifier.fillMaxWidth(),
+                colors = TopAppBarDefaults.mediumTopAppBarColors(
+                    containerColor = Color.Transparent,
+                ),
+                navigationIcon = {
+                    IconButton(
+                        onClick = {
+                            if (navGraph.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED)
+                                navGraph.popBackStack()
+                        }
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_back),
+                            contentDescription = "back button"
+                        )
+                    }
+                }
+            )
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp)
+                    .clip(RoundedCornerShape(20.dp)),
+                model = detailInfo.imgURL,
+                contentDescription = "Pokemon img"
+            )
 
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = detailInfo.name.replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(java.util.Locale.US) else it.toString()
-            }.replace('-', ' '),
-            fontSize = 42.sp,
-            textAlign = TextAlign.Center
-        )
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = detailInfo.name.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(java.util.Locale.US) else it.toString()
+                }.replace('-', ' '),
+                fontSize = 42.sp,
+                textAlign = TextAlign.Center
+            )
 
-        TypeInfo(types = detailInfo.types)
+            TypeInfo(types = detailInfo.types)
 
-        StatsInfo(
-            modifier = Modifier.padding(bottom = 20.dp),
-            stats = detailInfo.stats
-        )
+            StatsInfo(
+                modifier = Modifier.padding(bottom = 20.dp),
+                stats = detailInfo.stats
+            )
+        }
     }
 
+}
+
+@Composable
+fun handleResults(
+    loadState: LoadState?
+): Boolean {
+    return when (loadState) {
+        is LoadState.Error -> {
+            EmptyScreen(isEmpty = true)
+            false
+        }
+        null -> {
+            EmptyScreen()
+            false
+        }
+        else -> {
+            true
+        }
+    }
 }
 
 @Composable

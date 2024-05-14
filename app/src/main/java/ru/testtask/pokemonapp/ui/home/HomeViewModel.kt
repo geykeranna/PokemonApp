@@ -26,8 +26,15 @@ class HomeViewModel @Inject constructor(
         obtainEvent(Event.OnLoadingStarted)
     }
 
+    private var _loadState: LoadState? = null
+
     private fun startLoading() = viewModelScope.launch {
-        _pokemonList = repository.getPokemonsList()
+        _loadState = try {
+            _pokemonList = repository.getPokemonsList()
+            LoadState.Success
+        } catch (e: Exception) {
+            LoadState.Error
+        }
     }
 
     sealed class Event : BaseEvent() {
@@ -41,4 +48,9 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+}
+
+sealed class LoadState{
+    data object Error: LoadState()
+    data object Success: LoadState()
 }

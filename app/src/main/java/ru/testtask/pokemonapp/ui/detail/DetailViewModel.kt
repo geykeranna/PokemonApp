@@ -26,8 +26,19 @@ class DetailViewModel @AssistedInject constructor(
 
     private val _pokemon = MutableStateFlow(PokemonInfo.shimmerData)
 
+    val state: LoadState?
+        get() = _loadState
+
+    private var _loadState: LoadState? = null
+
     private fun startLoading() = viewModelScope.launch {
-        _pokemon.emit(repository.getPokemonInfo(id = pokemonId))
+        _loadState = try {
+            _pokemon.emit(repository.getPokemonInfo(id = pokemonId))
+            LoadState.Success
+        } catch (e: Exception) {
+            LoadState.Error
+        }
+
     }
 
     sealed class Event : BaseEvent() {
@@ -66,4 +77,9 @@ class DetailViewModel @AssistedInject constructor(
             }
         }
     }
+}
+
+sealed class LoadState{
+    data object Error: LoadState()
+    data object Success: LoadState()
 }
